@@ -2,7 +2,7 @@
   <div class="hero">
     <div class="container hero_content">
       <div class="text">
-        <h1><span>Now</span> Streaming</h1>
+        <h1><span>Now</span> Streaaming!</h1>
         <h2 class="mini-heading">it's chilling time</h2>
         <a href="#movie-grid" class="btn">View Movies</a>
       </div>
@@ -13,7 +13,6 @@
 <script>
 export default {
   name: 'Hero',
-
 }
 </script>
 
@@ -25,6 +24,7 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin-bottom: 1rem;
   @media (min-width: 750px) {
     height: 500px;
   }

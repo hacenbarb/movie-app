@@ -1,6 +1,25 @@
 <template>
   <div class="home">
+    <!-- HERO -->
     <Hero />
+    <!-- SEARCH -->
+    <div class="container">
+      <div class="search">
+        <input
+          type="text"
+          class="input no-border-radius"
+          v-model="search_query"
+          placeholder="the hobbit.."
+        />
+        <button
+          @click="clearSearch()"
+          class="btn no-border-radius"
+          v-show="search_query.length > 3"
+        >
+          clear
+        </button>
+      </div>
+    </div>
     <!-- <Loading v-if="$fetchState.pending" /> -->
     <!-- Movies -->
     <div class="container movies">
@@ -15,9 +34,17 @@
               alt=""
             />
             <p class="review">{{ movie.vote_average }}</p>
-            <p class="overview" v-if="movie.overview.length == 0">-- no overview --</p>
-            <p class="overview" v-else-if="movie.overview.length < 200">{{ movie.overview }}</p>
-            <p class="overview" v-else>{{ movie.overview.slice(0, 199) }}...</p>
+            <p
+              class="overview"
+              v-if="movie.overview.length == 0"
+              style="text-align: center"
+            >
+              -- no overview --
+            </p>
+            <p class="overview" v-else-if="movie.overview.length < 100">
+              {{ movie.overview }}
+            </p>
+            <p class="overview" v-else>{{ movie.overview.slice(0, 100) }}...</p>
           </div>
           <div class="info">
             <p class="title">
@@ -44,9 +71,7 @@
         </div>
       </div>
     </div>
-    <footer>
-      <p>created with ❤ by <a href="https://github.com/hacenbarb" class="link" target="_blank">hacen barboucha</a> check for the project in <a href="https://github.com/hacenbarb/movie-app" class="link" target="_blank">github</a></p>
-    </footer>
+    <Footer />
   </div>
 </template>
 
@@ -60,7 +85,7 @@ export default {
       API_KEY: `68e2dc67ddfafb643c87e5acdface487`,
       BASE_URL: `https://api.themoviedb.org/3`,
       now_playing_url: `https://api.themoviedb.org/3/movie/now_playing?api_key=68e2dc67ddfafb643c87e5acdface487&language=en-US&page=20`,
-      pages: 20,
+      search_query: '',
     }
   },
   async fetch() {
@@ -71,8 +96,10 @@ export default {
       const data = axios.get(this.now_playing_url)
       const result = await data
       this.movies = result.data.results
-      console.log(this.movies)
       return result.data
+    },
+    clearSearch() {
+      this.search_query = ''
     },
   },
 }
@@ -85,20 +112,14 @@ export default {
   }
   .search {
     display: flex;
-    padding: 32px 16px;
-    input {
+    align-items: center;
+    .input {
+      margin-bottom: 0;
       max-width: 350px;
-      width: 100%;
-      padding: 12px 6px;
-      font-size: 14px;
-      border: none;
-      &:focus {
-        outline: none;
-      }
     }
-    .button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+    .btn {
+      background-color: #c92502;
+      color: #fff;
     }
   }
   .movies {
@@ -112,7 +133,7 @@ export default {
         grid-template-columns: repeat(2, 1fr);
       }
       @media (min-width: 750px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
       @media (min-width: 1100px) {
         grid-template-columns: repeat(4, 1fr);
@@ -126,22 +147,17 @@ export default {
           overflow: hidden;
           height: 100%;
           width: 100%;
-          margin-bottom: .5rem;
+          margin-bottom: 0.5rem;
           .no-img {
             width: 100%;
             height: inherit;
             background-color: #c9c9c9;
-            display:flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             &::after {
-              content: 'this move don\'t have a poster';
+              content: "this movie don't have a poster";
               color: #222;
-            }
-          }
-          &:hover {
-            .overview {
-              transform: translateY(0);
             }
           }
           img {
@@ -165,14 +181,14 @@ export default {
               0 2px 4px -1px rgba(0, 0, 0, 0.06);
           }
           .overview {
+            width: 100%;
+            font-size: 1rem;
             line-height: 1.5;
             position: absolute;
             bottom: 0;
             background-color: rgba(201, 38, 2, 0.9);
-            padding: .75rem;
+            padding: 0.75rem;
             color: #fff;
-            transform: translateY(100%);
-            transition: 0.3s ease-in-out all;
           }
         }
         .info {
@@ -183,16 +199,11 @@ export default {
           }
           .release {
             color: #c9c9c9;
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
           }
         }
       }
     }
   }
-}
-footer {
-  padding-block: 1rem;
-  text-align: center;
-  color:#FFF;
 }
 </style>
