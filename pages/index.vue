@@ -8,24 +8,32 @@
         <input
           type="text"
           class="input no-border-radius"
-          v-model="search_query"
           placeholder="the hobbit.."
+          v-model="search_query"
+          @keypress="$fetch()"
         />
         <button
-          @click="clearSearch()"
+          @click="clearSearch"
           class="btn no-border-radius"
-          v-show="search_query.length > 3"
+          v-show="search_query.length > 1"
         >
           clear
         </button>
       </div>
     </div>
-    <!-- <Loading v-if="$fetchState.pending" /> -->
-    <!-- Movies -->
-    <div class="container movies">
+    <!-- LOADING -->
+    <Loading v-if="$fetchState.pending"/>
+    <!-- NOW STREAMIN -->
+    <div v-else class="container movies">
       <!-- Search Results -->
       <div id="movie-grid" class="movies-grid">
-        <div class="movie" v-for="(movie, index) in movies" :key="index">
+        <div
+          class="movie"
+          v-for="(movie, index) in search_query === ''
+            ? movies
+            : searched_movies"
+          :key="index"
+        >
           <div class="movie-img">
             <div v-if="movie.poster_path === null" class="no-img"></div>
             <img
@@ -63,7 +71,7 @@
             </p>
             <NuxtLink
               class="btn"
-              :to="{ name: 'movies-id', params: { id: movie.id } }"
+              :to="{ name: 'movies-movieid', params: { id: movie.id } }"
             >
               Get More Info
             </NuxtLink>
@@ -77,29 +85,49 @@
 
 <script>
 import axios from 'axios'
+const API_KEY = `68e2dc67ddfafb643c87e5acdface487`
+const BASE_URL = `https://api.themoviedb.org/3`
+const NOW_PLAYING_URL = `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US`
+const SEARCH_URL = `${BASE_URL}/search/movie?api_key=${API_KEY}`
+
 export default {
   name: 'home',
   data() {
     return {
       movies: [],
-      API_KEY: `68e2dc67ddfafb643c87e5acdface487`,
-      BASE_URL: `https://api.themoviedb.org/3`,
-      now_playing_url: `https://api.themoviedb.org/3/movie/now_playing?api_key=68e2dc67ddfafb643c87e5acdface487&language=en-US&page=20`,
+      searched_movies: [],
+      show: 'movies',
       search_query: '',
+      pages: 20,
     }
   },
   async fetch() {
-    await this.getMovies()
+    if (this.search_query === '')  {
+      await this.getMovies()
+    } else {
+      await this.searchMovies()
+    }
   },
+  fetchDelay:1000,
   methods: {
     async getMovies() {
-      const data = axios.get(this.now_playing_url)
+      const data = axios.get(`${NOW_PLAYING_URL}&page=${this.pages}`)
       const result = await data
       this.movies = result.data.results
-      return result.data
+    },
+    async searchMovies() {
+      await axios
+        .get(
+          `${SEARCH_URL}&query=${this.search_query.trim().replaceAll(' ', '+')}`
+        )
+        .then((res) => (this.searched_movies = res.data.results))
+        .catch((err) =>
+          console.error(`there's an error while searching for movies \n${err}`)
+        )
     },
     clearSearch() {
       this.search_query = ''
+      this.searched_movies = []
     },
   },
 }
