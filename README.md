@@ -1,6 +1,12 @@
-# movieApp
+# movies App using Nuxtjs and TMDB Api
 
-## Build Setup
+## 
+
+## Used Technologies
+
+- Nuxt js / Vue.js
+- Html/Css (scss)
+- The Movie Database Api [view docs](https://developers.themoviedb.org/3/getting-started/introduction)
 
 ```bash
 # install dependencies
@@ -16,8 +22,11 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+Special thanks to **John Komarnicki**
+For detailed explanation on how things work, check out:
+- [Nuxt js documentation](https://nuxtjs.org/docs/get-started/installation)
+- [The Movie Database Api documentation](https://developers.themoviedb.org/3/getting-started/introduction)
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
 ## Special Directories
 
