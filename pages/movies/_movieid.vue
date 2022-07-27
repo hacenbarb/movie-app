@@ -4,7 +4,9 @@
 
   <!-- Movie Info -->
   <div v-else class="single-movie container">
-    <NuxtLink class="link link-underline" :to="{ name: 'index' }">&lt; Back </NuxtLink>
+    <NuxtLink class="link link-underline" :to="{ name: 'index' }"
+      >&lt; Back
+    </NuxtLink>
     <div class="movie-info">
       <div class="movie-img">
         <img
@@ -51,16 +53,16 @@ const API_KEY = `68e2dc67ddfafb643c87e5acdface487`
 const BASE_URL = `https://api.themoviedb.org/3`
 export default {
   name: 'singleMovie',
-  async fetch() {
-    await this.getSingleMovie()
-  },
-  // delay for fetching
-  fetchDelay: 1000,
   head() {
     return {
       title: this.movie.title,
     }
   },
+  async fetch() {
+    await this.getSingleMovie()
+  },
+  // delay for fetching
+  fetchDelay: 1000,
   data() {
     return {
       movie: '',

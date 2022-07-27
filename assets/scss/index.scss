@@ -173,8 +173,8 @@ a {
 
 .container {
   width: 100%;
-  padding-right: .75rem;
-  padding-left: .75rem;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
   margin-right: auto;
   margin-left: auto;
   @include breakpoint-up(sm) {
@@ -262,7 +262,7 @@ a {
   align-items: center;
   @keyframes circle-loading {
     to {
-      transform: rotate(360deg)
+      transform: rotate(360deg);
     }
   }
   span {
@@ -271,11 +271,20 @@ a {
     height: 70px;
     border-radius: 50%;
     border: 2px solid transparent;
-    border-top-color: #FFF;
+    border-top-color: #fff;
     animation: circle-loading 1.2s ease-in-out infinite;
   }
 }
 
 .no-border-radius {
   border-radius: 0;
+}
+
+.home-enter-active,
+.home-leave-active {
+  transition: opacity 0.5s;
+}
+.home-enter,
+.home-leave-active {
+  opacity: 0;
 }

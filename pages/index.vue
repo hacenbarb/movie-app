@@ -92,6 +92,11 @@ const SEARCH_URL = `${BASE_URL}/search/movie?api_key=${API_KEY}`
 
 export default {
   name: 'home',
+  head() {
+    return {
+      title: 'movies'
+    }
+  },
   data() {
     return {
       movies: [],
