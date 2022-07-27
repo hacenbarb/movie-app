@@ -23,6 +23,7 @@ $ npm run start
 $ npm run generate
 ```
 Special thanks to **John Komarnicki**
+
 For detailed explanation on how things work, check out:
 - [Nuxt js documentation](https://nuxtjs.org/docs/get-started/installation)
 - [The Movie Database Api documentation](https://developers.themoviedb.org/3/getting-started/introduction)
