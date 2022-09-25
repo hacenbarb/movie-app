@@ -1,6 +1,6 @@
 # movies App using Nuxtjs and TMDB Api
 
-## 
+to live the full experience [view live preview](https://nuxt-movies-app.netlify.app/)
 
 ## Used Technologies
 
