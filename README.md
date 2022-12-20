@@ -1,5 +1,13 @@
 # movies App using Nuxtjs and TMDB Api
 
+Movie Website that provide to the user:
+
+✔ The most latest Movies <br>
+✔ Search about a specific movie <br>
+✔ View details about a specific movie <br>
+
+In a simple, cinematic user interface.
+
 to live the full experience [view live preview](https://nuxt-movies-app.netlify.app/)
 
 ## Used Technologies
@@ -8,22 +16,8 @@ to live the full experience [view live preview](https://nuxt-movies-app.netlify.
 - Html/Css (scss)
 - The Movie Database Api [view docs](https://developers.themoviedb.org/3/getting-started/introduction)
 
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-Special thanks to **John Komarnicki**
-
 For detailed explanation on how things work, check out:
 - [Nuxt js documentation](https://nuxtjs.org/docs/get-started/installation)
 - [The Movie Database Api documentation](https://developers.themoviedb.org/3/getting-started/introduction)
+
+Special thanks to **John Komarnicki**
