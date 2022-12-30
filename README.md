@@ -21,3 +21,5 @@ For detailed explanation on how things work, check out:
 - [The Movie Database Api documentation](https://developers.themoviedb.org/3/getting-started/introduction)
 
 Special thanks to **John Komarnicki**
+
+this project is made with ♥ by [@hacenbarb](https://github.com/hacenbarb)
